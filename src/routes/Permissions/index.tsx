@@ -1,8 +1,8 @@
 import { getToken } from '@/utils/token';
-import React, { useEffect } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-const Permissions: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Permissions: React.FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
