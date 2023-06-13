@@ -48,11 +48,15 @@ export const Input = styled(
   borderRadius: '5px',
   width: '100%',
   height: '36px',
-  border: '1px solid #acacac',
+  border: 'none',
   padding: '0 10px',
   marginBottom: '20px',
   boxSizing: 'border-box',
+  color: '#b092fb',
   ':focus': {
     outline: 'none',
+  },
+  '::placeholder': {
+    color: '#d2c1fd',
   },
 });

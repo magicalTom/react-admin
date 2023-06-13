@@ -1,29 +1,33 @@
 import RootObject from '@/database/RootObject';
-import { tokenAtom } from '@/recoil/user';
 import https from '@/utils/https';
+import { setToken } from '@/utils/token';
 import { Button } from 'antd';
 import React, { ChangeEvent, FormEvent, useCallback, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 import * as SC from './styles';
 
 const Login: React.FC = () => {
-  const setToken = useSetRecoilState(tokenAtom);
+  const navigate = useNavigate();
   const [form, setForm] = useState({
-    username: '',
-    password: '',
+    username: 'admin',
+    password: 'admin',
   });
 
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    setForm((old) => ({ ...old, [e.target.name]: e.target.value }));
-  }, []);
+  const handleChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      setForm((old) => ({ ...old, [e.target.name]: e.target.value }));
+    },
+    [setForm]
+  );
 
   const handleSubmit = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const res = await https.get<RootObject<{ token: string }>>('/login', form);
       setToken(res.data.data.token);
+      navigate('/', { replace: true });
     },
-    [form, setToken]
+    [form, navigate]
   );
 
   return (

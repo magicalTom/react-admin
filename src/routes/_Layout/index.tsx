@@ -10,6 +10,7 @@ import { default as CHeader } from './components/Header';
 const { Header, Content, Footer, Sider } = Layout;
 
 const items: MenuProps['items'] = [
+  { key: '/', icon: <HomeOutlined />, label: 'Home' },
   {
     key: 'dashboard',
     icon: <HomeOutlined />,

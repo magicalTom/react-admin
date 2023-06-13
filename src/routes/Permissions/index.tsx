@@ -1,14 +1,16 @@
+import { getToken } from '@/utils/token';
 import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Permissions: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (location.pathname === '/login') {
-      console.log(location.pathname);
+    if (location.pathname !== '/login' && !getToken()) {
+      navigate('/login', { replace: true });
     }
-  }, [location]);
+  }, [location, navigate]);
 
   return <>{children}</>;
 };
